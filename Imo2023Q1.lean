@@ -1036,18 +1036,11 @@ theorem prime_power_iff_special_divisor_property (n : ℕ) (hc : Composite n) :
       rw [← h₃]
       apply ppow_sorted_div
       exact Nat.prime_iff.mpr h₁
-
-    have h44: ∀ i : Fin (List.length (sorted_divisors ↑n)),
-        List.get (sorted_divisors n) i = p^(i.val) := by
-      intro i
-      rw [← h₄ i]
-
     intro i
-    -- h_omega helps omega
     have := i.isLt
-    rw [h44 ⟨i.val,by omega⟩]
-    rw [h44 ⟨i.val+1,by omega⟩]
-    rw [h44 ⟨i.val+2,by omega⟩]
+    rw [h₄ ⟨i.val,by omega⟩]
+    rw [h₄ ⟨i.val+1,by omega⟩]
+    rw [h₄ ⟨i.val+2,by omega⟩]
     simp
     apply Dvd.dvd.add
     exact Dvd.intro p rfl
